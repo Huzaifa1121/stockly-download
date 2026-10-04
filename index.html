@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stockly — inventory and sales for your shop</title>
+<meta name="description" content="Stockly runs on your shop's own computer. Sell with a barcode scanner, print receipts, see today's profit. Works without internet. One-time price, no monthly fee.">
+<link rel="icon" href="icon.png">
+<meta property="og:title" content="Stockly — inventory and sales for your shop">
+<meta property="og:description" content="Works without internet. Your data stays in your shop. One-time price.">
+<meta property="og:image" content="icon.png">
+<style>
+  :root {
+    --teal: #0d9488; --teal-dark: #0f766e; --ink: #0f172a; --muted: #475569;
+    --line: #e2e8f0; --bg: #f8fafc; --card: #ffffff; --wa: #25d366;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.55; }
+  a { color: var(--teal-dark); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  header { background: #0f172a; color: #fff; }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .02em; }
+  .brand img { width: 32px; height: 32px; border-radius: 8px; }
+  nav a { color: #cbd5e1; text-decoration: none; margin-left: 20px; font-size: 14px; }
+  nav a:hover { color: #fff; }
+  .hero { padding: 64px 0 48px; background: linear-gradient(180deg, #0f172a 0%, #134e4a 100%); color: #fff; }
+  .hero h1 { font-size: clamp(30px, 5vw, 48px); line-height: 1.1; margin: 0 0 16px; letter-spacing: -.02em; }
+  .hero p { font-size: 18px; color: #ccfbf1; max-width: 640px; margin: 0 0 28px; }
+  .urdu { font-size: 20px; direction: rtl; text-align: left; color: #99f6e4; margin-bottom: 8px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 12px; font-weight: 600; text-decoration: none; font-size: 16px; border: 0; cursor: pointer; }
+  .btn-primary { background: #fff; color: var(--ink); }
+  .btn-primary:hover { background: #f1f5f9; }
+  .btn-wa { background: var(--wa); color: #fff; }
+  .btn-wa:hover { background: #1ebe5b; }
+  .btn svg { width: 20px; height: 20px; }
+  .note { font-size: 13px; color: #99f6e4; margin-top: 14px; }
+  section { padding: 56px 0; }
+  section + section { border-top: 1px solid var(--line); }
+  h2 { font-size: 28px; margin: 0 0 8px; letter-spacing: -.01em; }
+  .lead { color: var(--muted); margin: 0 0 28px; max-width: 640px; }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+  .card h3 { margin: 0 0 6px; font-size: 16px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  .pill { display: inline-block; font-size: 12px; font-weight: 600; color: var(--teal-dark); background: #ccfbf1; border-radius: 999px; padding: 3px 10px; margin-bottom: 10px; }
+  .steps { counter-reset: s; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .step { position: relative; padding: 20px 20px 20px 64px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; }
+  .step::before { counter-increment: s; content: counter(s); position: absolute; left: 20px; top: 18px; width: 32px; height: 32px; border-radius: 50%; background: var(--teal); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .step h3 { margin: 0 0 6px; font-size: 16px; }
+  .step p { margin: 0; color: var(--muted); font-size: 14px; }
+  .os { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .os ol { margin: 8px 0 0; padding-left: 20px; color: var(--muted); font-size: 14px; }
+  .os li { margin-bottom: 6px; }
+  kbd { background: #f1f5f9; border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; font-size: 13px; }
+  .price { background: var(--card); border: 2px solid var(--teal); border-radius: 18px; padding: 28px; display: grid; gap: 20px; grid-template-columns: 1fr auto; align-items: center; }
+  .price .big { font-size: 26px; font-weight: 700; margin: 0 0 6px; }
+  .price ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; }
+  summary { font-weight: 600; cursor: pointer; }
+  details p { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+  footer a { margin-right: 16px; }
+  .float { position: fixed; right: 16px; bottom: 16px; z-index: 10; box-shadow: 0 8px 24px rgba(0,0,0,.2); border-radius: 999px; }
+  @media (max-width: 640px) {
+    nav { display: none; }
+    .price { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand"><img src="icon.png" alt=""> Stockly</div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
+      <a href="#price">Price</a>
+      <a href="#faq">Questions</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="urdu">آپ کی دکان کا سٹاک اور بکری — بغیر انٹرنیٹ کے</div>
+    <h1>Inventory and sales for your shop.<br>Works without internet.</h1>
+    <p>Stockly runs on your shop's own computer. Scan barcodes, sell, print receipts, see today's profit. Your records stay in your shop, not on somebody's server.</p>
+    <div class="btns">
+      <a class="btn btn-primary" href="https://github.com/Huzaifa1121/stockly-download/releases/latest/download/stockly.zip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        Download for Windows and Mac
+      </a>
+      <a class="btn btn-wa" href="https://wa.me/923076755647?text=Salam%2C%20I%20want%20to%20buy%20Stockly%20for%20my%20shop." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 0 16.4 8.1 8.1 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.3 4.3c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.3 2.5 1 3 .8 3.5.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6z"/></svg>
+        Ask on WhatsApp
+      </a>
+    </div>
+    <div class="note">Free to download and try. The licence key you buy unlocks it for your shop — one computer, no expiry.</div>
+  </div>
+</section>
+
+<section id="shops">
+  <div class="wrap">
+    <h2>Made for shops like yours</h2>
+    <p class="lead">Pick your shop type at setup and Stockly sets the units, expiry dates and batch numbers to match. Everything can be changed later.</p>
+    <div class="grid">
+      <div class="card"><span class="pill">General shop</span><h3>Kiryana, hardware, stationery</h3><p>Sell by the piece or the pack. Low-stock alerts so you reorder before you run out.</p></div>
+      <div class="card"><span class="pill">Cloth and boutique</span><h3>Sell by the metre</h3><p>Sell 2.5 metres off a 50 m roll or a 12 m than. Ready-made by the piece or the pair.</p></div>
+      <div class="card"><span class="pill">Pharmacy</span><h3>Expiry and batch numbers</h3><p>Sell by the tablet out of a strip, syrup by the ml. See what expires soon before it does.</p></div>
+      <div class="card"><span class="pill">Fertilizer and seed</span><h3>Sell by the kilo or the bag</h3><p>Loose kilos out of a 50 kg bag, batch numbers kept for every lot.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <h2>What it does</h2>
+    <p class="lead">Everything a counter needs, and nothing that gets in the way.</p>
+    <div class="grid">
+      <div class="card"><h3>Sell fast</h3><p>Scan with a USB scanner or the device camera. Edit the price in the cart. Print the receipt with your logo.</p></div>
+      <div class="card"><h3>Works offline</h3><p>Internet down? Keep selling. Sales are saved on the device and upload by themselves when the connection returns.</p></div>
+      <div class="card"><h3>Today's profit</h3><p>Revenue, profit after expenses, monthly totals, low stock and expiry alerts, all on one dashboard.</p></div>
+      <div class="card"><h3>Returns</h3><p>Return part of a sale. Stock goes back on the shelf automatically.</p></div>
+      <div class="card"><h3>Staff accounts</h3><p>Cashiers can sell. Only the owner sees profit, stock prices and expenses.</p></div>
+      <div class="card"><h3>Phones and tablets too</h3><p>Open Stockly on any device on the shop wi-fi, or install it as an app with its own icon.</p></div>
+      <div class="card"><h3>Your data is yours</h3><p>One file on your computer holds everything. Copy it to a USB stick and you have a full backup. Nothing is sent anywhere.</p></div>
+      <div class="card"><h3>Reports</h3><p>Sales by day, export to Excel as CSV, and a full export of all records whenever you like.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <h2>Up and running in three steps</h2>
+    <p class="lead">You need a Windows PC or a Mac that stays on while the shop is open, and internet for the install only.</p>
+    <div class="steps">
+      <div class="step"><h3>Download and unzip</h3><p>Press the Download button, then move the Stockly folder into Documents.</p></div>
+      <div class="step"><h3>Double-click Start Stockly</h3><p>The first time it installs what it needs and takes a few minutes. After that it opens in seconds, or starts by itself with the computer.</p></div>
+      <div class="step"><h3>Paste your licence key</h3><p>Message us on WhatsApp, pay, and you get a key straight back. Paste it on the first screen. Then name your shop and start selling.</p></div>
+    </div>
+
+    <h2 style="margin-top:40px;font-size:22px">The security warning on first run</h2>
+    <p class="lead">Every program downloaded from the internet gets a warning the first time. This is normal. Here is what to click.</p>
+    <div class="os">
+      <div class="card">
+        <h3>Windows</h3>
+        <ol>
+          <li>Double-click <kbd>Start Stockly</kbd>.</li>
+          <li>If "Windows protected your PC" appears, click <kbd>More info</kbd>, then <kbd>Run anyway</kbd>.</li>
+          <li>If "Open File - Security Warning" appears, click <kbd>Run</kbd>.</li>
+          <li>Say yes to installing Node.js when asked. Stockly runs on it.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Mac</h3>
+        <ol>
+          <li>Right-click <kbd>Start Stockly</kbd> and choose <kbd>Open</kbd>.</li>
+          <li>Click <kbd>Open</kbd> again in the warning. You only do this once.</li>
+          <li>Enter your Mac's password when it installs Node.js.</li>
+        </ol>
+      </div>
+    </div>
+    <p style="margin-top:20px"><a href="INSTALL.md">Read the full install guide</a>, including backups, other devices in the shop, and what to do when something goes wrong.</p>
+  </div>
+</section>
+
+<section id="price">
+  <div class="wrap">
+    <h2>One price, once</h2>
+    <p class="lead">No monthly fee. No internet needed to keep using it. The licence never expires.</p>
+    <div class="price">
+      <div>
+        <p class="big">Pay once per shop computer</p>
+        <ul>
+          <li>Lifetime licence for one computer</li>
+          <li>Unlimited products, sales and staff accounts</li>
+          <li>Phones and tablets on the shop wi-fi included</li>
+          <li>Help over WhatsApp to get you started</li>
+        </ul>
+      </div>
+      <a class="btn btn-wa" href="https://wa.me/923076755647?text=Salam%2C%20what%20is%20the%20price%20of%20Stockly%3F" target="_blank" rel="noopener">Ask for today's price</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>Questions</h2>
+    <details><summary>Does it need internet?</summary><p>Only for the install. After that, selling, stock, receipts and reports all work with no internet at all.</p></details>
+    <details><summary>Where is my data kept?</summary><p>In one file on your own computer, inside the Stockly folder. It is never uploaded anywhere. Copy that folder to a USB stick every week and you have a complete backup.</p></details>
+    <details><summary>Can I use it on my phone?</summary><p>Yes. While the shop computer is on, any phone or tablet on the same wi-fi can open Stockly in its browser and install it as an app. The computer holds the data; the others just show it.</p></details>
+    <details><summary>Can my cashier see my profit?</summary><p>No. Cashiers can sell and take returns. Profit, cost prices, stock editing and expenses are for the owner only.</p></details>
+    <details><summary>What if I change computers?</summary><p>Copy your data folder to the new machine and message us with the computer code shown on screen. We issue a new key for the new computer at no charge.</p></details>
+    <details><summary>Is there a monthly fee?</summary><p>No. You pay once for the licence. Optional yearly support is available if you want someone on call.</p></details>
+    <details><summary>I forgot my password.</summary><p>It can be reset on the shop computer. The install guide shows how, and we can walk you through it on WhatsApp.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="https://wa.me/923076755647" target="_blank" rel="noopener">WhatsApp 0307 6755647</a>
+    <a href="https://github.com/Huzaifa1121/stockly-download/releases/latest/download/stockly.zip">Download</a>
+    <a href="INSTALL.md">Install guide</a>
+    <div style="margin-top:12px">© 2026 Stockly. Built for shops in Pakistan.</div>
+  </div>
+</footer>
+
+<a class="float btn btn-wa" href="https://wa.me/923076755647?text=Salam%2C%20I%20want%20to%20buy%20Stockly%20for%20my%20shop." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 0 16.4 8.1 8.1 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.3 4.3c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.3 2.5 1 3 .8 3.5.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6z"/></svg>
+  WhatsApp
+</a>
+
+</body>
+</html>
