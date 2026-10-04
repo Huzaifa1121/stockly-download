@@ -12,7 +12,7 @@ APP="$HOME/Documents/stockly"
 # Build a fresh zip from the latest committed code, into a folder this
 # script can read. (macOS stops Terminal from listing the Desktop.)
 PACK_DIR="$(mktemp -d)"
-echo "Packing Stockly from $APP…"
+echo "Packing Stockly from ${APP}..."
 ( cd "$APP" && STOCKLY_PACK_DIR="$PACK_DIR" npm run --silent pack >/dev/null )
 ZIP="$(ls "$PACK_DIR"/stockly-*.zip 2>/dev/null | head -1)"
 [ -n "$ZIP" ] || { echo "Packing failed. Run npm run pack in $APP to see why."; exit 1; }
