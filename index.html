@@ -4,8 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Stockly — inventory and sales for your shop</title>
-<meta name="description" content="Stockly runs on your shop's own computer. Sell with a barcode scanner, print receipts, see today's profit. Works without internet. Rs 30,000 once, no monthly fee.">
-<link rel="icon" href="icon.png">
+<meta name="description" content="Stockly runs on your shop's own computer. Sell, keep an udhar khata with WhatsApp reminders, see today's profit, and back up to Google Drive every day. Works without internet. Rs 30,000 once, no monthly fee.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="icon.png" type="image/png">
+<link rel="apple-touch-icon" href="icon.png">
 <meta property="og:title" content="Stockly — inventory and sales for your shop">
 <meta property="og:description" content="Works without internet. Your data stays in your shop. One-time price.">
 <meta property="og:image" content="https://huzaifa1121.github.io/stockly-download/img/pharmacy-dashboard.jpg">
@@ -75,15 +77,25 @@
   .tabs-top { margin: 0 0 18px; }
   .tabs-top .tab { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.25); color: #fff; }
   .tabs-top .tab[aria-selected="true"] { background: #fff; color: var(--ink); border-color: #fff; }
-  .thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+  .thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 18px; }
   .thumbs a { display: block; text-decoration: none; color: var(--muted); font-size: 13px; text-align: center; }
   .thumbs img { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 6px; box-shadow: 0 6px 16px rgba(15,23,42,.08); }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .split h2 { margin-top: 10px; }
+  .ticks { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .ticks li { position: relative; padding-left: 28px; color: var(--muted); font-size: 15px; }
+  .ticks li::before { content: ""; position: absolute; left: 0; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: #ccfbf1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f766e' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/12px no-repeat; }
+  .ticks b { color: var(--ink); font-weight: 600; }
+  .frame.shot { display: block; }
+  .frame.shot img { display: block; width: 100%; height: auto; }
+  #tour .frame video { display: block; width: 100%; height: auto; background: #0f172a; }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
   .phone-row { display: grid; grid-template-columns: 1fr 260px; gap: 32px; align-items: center; }
   .phone { border: 10px solid #0f172a; border-radius: 34px; overflow: hidden; box-shadow: 0 20px 50px rgba(15,23,42,.25); }
   .phone img { display: block; width: 100%; height: 460px; object-fit: cover; object-position: top; }
   .rs { font-size: 44px; font-weight: 800; letter-spacing: -.02em; margin: 0; color: var(--ink); }
   .rs small { font-size: 16px; font-weight: 600; color: var(--muted); }
-  @media (max-width: 640px) { .phone-row { grid-template-columns: 1fr; } .phone { max-width: 240px; margin: 0 auto; } }
+  @media (max-width: 640px) { .thumbs { grid-template-columns: repeat(2, 1fr); } .phone-row { grid-template-columns: 1fr; } .phone { max-width: 240px; margin: 0 auto; } }
   @media (max-width: 640px) {
     nav { display: none; }
     .price { grid-template-columns: 1fr; }
@@ -96,6 +108,9 @@
   <div class="wrap">
     <div class="brand"><img src="icon.png" alt=""> Stockly</div>
     <nav>
+      <a href="#tour">Tour</a>
+      <a href="#udhar">Udhar khata</a>
+      <a href="#backups">Backups</a>
       <a href="#features">Features</a>
       <a href="#install">Install</a>
       <a href="#price">Price</a>
@@ -108,7 +123,7 @@
   <div class="wrap">
     <div class="urdu">آپ کی دکان کا سٹاک اور بکری — بغیر انٹرنیٹ کے</div>
     <h1>Inventory and sales for your shop.<br>Works without internet.</h1>
-    <p>Stockly runs on your shop's own computer. Scan barcodes, sell, print receipts, see today's profit. Your records stay in your shop, not on somebody's server.</p>
+    <p>Stockly runs on your shop's own computer. Sell and print receipts, keep your udhar khata with WhatsApp reminders, see today's profit, and back up to Google Drive every day. Your records stay in your shop.</p>
     <div class="btns">
       <a class="btn btn-primary" href="https://github.com/Huzaifa1121/stockly-download/releases/latest/download/stockly.zip">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
@@ -128,18 +143,77 @@
     <div class="tabs tabs-top" role="tablist"><button class="tab" role="tab" aria-selected="true" data-shop="pharmacy">Medical store</button><button class="tab" role="tab" aria-selected="false" data-shop="kiryana">Kiryana</button><button class="tab" role="tab" aria-selected="false" data-shop="cloth">Cloth shop</button></div>
     <div class="panel" data-shop="pharmacy">
       <div class="frame"><video controls muted playsinline preload="metadata" poster="video/pharmacy.jpg" width="1280" height="800"><source src="video/pharmacy.mp4" type="video/mp4"></video></div>
-      <p class="caption"><strong>Shifa Medical Store.</strong> Medicines sold by the tablet out of a strip and syrup by the ml, with expiry dates, batch numbers, and human and animal medicine kept apart.</p>
-      <div class="thumbs"><a href="img/pharmacy-sell.jpg" target="_blank" rel="noopener"><img src="img/pharmacy-sell.jpg" alt="Shifa Medical Store: Sell screen" loading="lazy" width="1600" height="1000"><span>Sell</span></a><a href="img/pharmacy-dashboard.jpg" target="_blank" rel="noopener"><img src="img/pharmacy-dashboard.jpg" alt="Shifa Medical Store: Dashboard screen" loading="lazy" width="1600" height="1000"><span>Dashboard</span></a><a href="img/pharmacy-inventory.jpg" target="_blank" rel="noopener"><img src="img/pharmacy-inventory.jpg" alt="Shifa Medical Store: Inventory screen" loading="lazy" width="1600" height="1000"><span>Inventory</span></a></div>
+      <p class="caption"><strong>Shifa Medical Store.</strong> Medicines by the tablet or the strip, syrup by the ml, expiry and batch numbers, and farmers on udhar.</p>
+      <div class="thumbs"><a href="img/pharmacy-sell.jpg" target="_blank" rel="noopener"><img src="img/pharmacy-sell.jpg" alt="Shifa Medical Store: Sell" loading="lazy" width="1600" height="1000"><span>Sell</span></a><a href="img/pharmacy-udhar.jpg" target="_blank" rel="noopener"><img src="img/pharmacy-udhar.jpg" alt="Shifa Medical Store: Sell on udhar" loading="lazy" width="1600" height="1000"><span>Sell on udhar</span></a><a href="img/pharmacy-customer.jpg" target="_blank" rel="noopener"><img src="img/pharmacy-customer.jpg" alt="Shifa Medical Store: Customer khata" loading="lazy" width="1600" height="1000"><span>Customer khata</span></a><a href="img/pharmacy-dashboard.jpg" target="_blank" rel="noopener"><img src="img/pharmacy-dashboard.jpg" alt="Shifa Medical Store: Dashboard" loading="lazy" width="1600" height="1000"><span>Dashboard</span></a></div>
     </div>
     <div class="panel" data-shop="kiryana" hidden>
       <div class="frame"><video controls muted playsinline preload="none" poster="video/kiryana.jpg" width="1280" height="800"><source src="video/kiryana.mp4" type="video/mp4"></video></div>
-      <p class="caption"><strong>Al-Madina Kiryana Store.</strong> Rice and atta sold loose by the kilo out of the bag, packed goods by the piece or the carton.</p>
-      <div class="thumbs"><a href="img/kiryana-sell.jpg" target="_blank" rel="noopener"><img src="img/kiryana-sell.jpg" alt="Al-Madina Kiryana Store: Sell screen" loading="lazy" width="1600" height="1000"><span>Sell</span></a><a href="img/kiryana-dashboard.jpg" target="_blank" rel="noopener"><img src="img/kiryana-dashboard.jpg" alt="Al-Madina Kiryana Store: Dashboard screen" loading="lazy" width="1600" height="1000"><span>Dashboard</span></a><a href="img/kiryana-inventory.jpg" target="_blank" rel="noopener"><img src="img/kiryana-inventory.jpg" alt="Al-Madina Kiryana Store: Inventory screen" loading="lazy" width="1600" height="1000"><span>Inventory</span></a></div>
+      <p class="caption"><strong>Al-Madina Kiryana Store.</strong> Rice and atta loose by the kilo, packed goods by the piece or carton, and the neighbourhood's udhar khata.</p>
+      <div class="thumbs"><a href="img/kiryana-sell.jpg" target="_blank" rel="noopener"><img src="img/kiryana-sell.jpg" alt="Al-Madina Kiryana Store: Sell" loading="lazy" width="1600" height="1000"><span>Sell</span></a><a href="img/kiryana-udhar.jpg" target="_blank" rel="noopener"><img src="img/kiryana-udhar.jpg" alt="Al-Madina Kiryana Store: Sell on udhar" loading="lazy" width="1600" height="1000"><span>Sell on udhar</span></a><a href="img/kiryana-customer.jpg" target="_blank" rel="noopener"><img src="img/kiryana-customer.jpg" alt="Al-Madina Kiryana Store: Customer khata" loading="lazy" width="1600" height="1000"><span>Customer khata</span></a><a href="img/kiryana-dashboard.jpg" target="_blank" rel="noopener"><img src="img/kiryana-dashboard.jpg" alt="Al-Madina Kiryana Store: Dashboard" loading="lazy" width="1600" height="1000"><span>Dashboard</span></a></div>
     </div>
     <div class="panel" data-shop="cloth" hidden>
       <div class="frame"><video controls muted playsinline preload="none" poster="video/cloth.jpg" width="1280" height="800"><source src="video/cloth.mp4" type="video/mp4"></video></div>
-      <p class="caption"><strong>Khan Cloth House.</strong> Lawn and wash &amp; wear sold by the metre off the roll or the than, suits and dupattas by the piece.</p>
-      <div class="thumbs"><a href="img/cloth-sell.jpg" target="_blank" rel="noopener"><img src="img/cloth-sell.jpg" alt="Khan Cloth House: Sell screen" loading="lazy" width="1600" height="1000"><span>Sell</span></a><a href="img/cloth-dashboard.jpg" target="_blank" rel="noopener"><img src="img/cloth-dashboard.jpg" alt="Khan Cloth House: Dashboard screen" loading="lazy" width="1600" height="1000"><span>Dashboard</span></a><a href="img/cloth-inventory.jpg" target="_blank" rel="noopener"><img src="img/cloth-inventory.jpg" alt="Khan Cloth House: Inventory screen" loading="lazy" width="1600" height="1000"><span>Inventory</span></a></div>
+      <p class="caption"><strong>Khan Cloth House.</strong> Lawn and wash &amp; wear by the metre off the roll or the than, suits by the piece, tailors on udhar.</p>
+      <div class="thumbs"><a href="img/cloth-sell.jpg" target="_blank" rel="noopener"><img src="img/cloth-sell.jpg" alt="Khan Cloth House: Sell" loading="lazy" width="1600" height="1000"><span>Sell</span></a><a href="img/cloth-udhar.jpg" target="_blank" rel="noopener"><img src="img/cloth-udhar.jpg" alt="Khan Cloth House: Sell on udhar" loading="lazy" width="1600" height="1000"><span>Sell on udhar</span></a><a href="img/cloth-customer.jpg" target="_blank" rel="noopener"><img src="img/cloth-customer.jpg" alt="Khan Cloth House: Customer khata" loading="lazy" width="1600" height="1000"><span>Customer khata</span></a><a href="img/cloth-dashboard.jpg" target="_blank" rel="noopener"><img src="img/cloth-dashboard.jpg" alt="Khan Cloth House: Dashboard" loading="lazy" width="1600" height="1000"><span>Dashboard</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section id="tour">
+  <div class="wrap">
+    <h2>Watch the full tour</h2>
+    <p class="lead">Two minutes, step by step: a cash sale, an udhar sale part paid, the customer's khata, a JazzCash payment, a WhatsApp reminder, a return, the day's cash and udhar, and daily backups.</p>
+    <div class="frame"><video controls playsinline preload="none" poster="video/stockly-tour.jpg" width="1280" height="800"><source src="video/stockly-tour.mp4" type="video/mp4"></video></div>
+  </div>
+</section>
+
+<section id="udhar">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <span class="pill">Udhar khata</span>
+        <h2>Your udhar register, without the paper</h2>
+        <p class="lead">Every shop gives udhar. Stockly keeps the khata for you, so nobody argues about what is owed and nothing is forgotten.</p>
+        <ul class="ticks">
+          <li><b>Sell on udhar</b> from its own screen, with the same products. All on udhar, or part paid now and the rest on the khata.</li>
+          <li><b>A register for every customer</b>: each udhar sale, payment and return with the date, who served, and a running balance.</li>
+          <li><b>Receive payments</b> by cash, Easypaisa, JazzCash or bank, part or full.</li>
+          <li><b>WhatsApp reminder</b> in one tap, with the amount already written in.</li>
+          <li><b>Returns come off the khata first</b>; only what they no longer owe is paid back in cash.</li>
+          <li><b>Udhar limit</b> per customer. A cashier cannot go past it; the owner can.</li>
+          <li><b>Bring over your paper register</b>: enter what each customer already owes.</li>
+          <li><b>See who is late</b>: anyone who has paid nothing in 30 days is flagged.</li>
+          <li><b>Cash in the drawer</b> in the day's report, kept separate from udhar, so the till count matches.</li>
+          <li>The receipt shows <b>paid now, added to khata, and the new balance</b>.</li>
+        </ul>
+      </div>
+      <div>
+        <a href="img/cloth-customer.jpg" target="_blank" rel="noopener" class="frame shot"><img src="img/cloth-customer.jpg" alt="A customer's udhar khata with running balance and WhatsApp reminder" loading="lazy" width="1600" height="1000"></a>
+        <a href="img/kiryana-khata.jpg" target="_blank" rel="noopener" class="frame shot" style="margin-top:14px"><img src="img/kiryana-khata.jpg" alt="The udhar khata: total outstanding and who owes" loading="lazy" width="1600" height="1000"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="backups">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <a href="img/backups.jpg" target="_blank" rel="noopener" class="frame shot"><img src="img/backups.jpg" alt="The Backups page: Google Drive, daily times and copies on this computer" loading="lazy" width="1600" height="1000"></a>
+      </div>
+      <div>
+        <span class="pill">Daily backups</span>
+        <h2>If the computer breaks, your records don't</h2>
+        <p class="lead">A shop's records are worth more than the computer they sit on. Stockly copies them every day, by itself.</p>
+        <ul class="ticks">
+          <li><b>Every day at the times you choose</b> (9 PM to start), a full copy is saved on the computer. The last 7 are kept.</li>
+          <li><b>Connect Google Drive once</b> and every copy is also uploaded to a <i>Stockly backups</i> folder in your own Drive.</li>
+          <li><b>Stockly sees only that folder</b>, nothing else in your Drive, and your Google sign-in is stored encrypted.</li>
+          <li><b>Computer was off at backup time?</b> It backs up soon after it starts.</li>
+          <li><b>A warning on every screen</b> if there has been no backup for 3 days.</li>
+          <li><b>Back up now</b> and <b>Download backup</b> whenever you like, and simple steps to restore.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -162,14 +236,14 @@
     <h2>What it does</h2>
     <p class="lead">Everything a counter needs, and nothing that gets in the way.</p>
     <div class="grid">
-      <div class="card"><h3>Sell fast</h3><p>Scan with a USB scanner or the device camera. Edit the price in the cart. Print the receipt with your logo.</p></div>
-      <div class="card"><h3>Works offline</h3><p>Internet down? Keep selling. Sales are saved on the device and upload by themselves when the connection returns.</p></div>
-      <div class="card"><h3>Today's profit</h3><p>Revenue, profit after expenses, monthly totals, low stock and expiry alerts, all on one dashboard.</p></div>
-      <div class="card"><h3>Returns</h3><p>Return part of a sale. Stock goes back on the shelf automatically.</p></div>
-      <div class="card"><h3>Staff accounts</h3><p>Cashiers can sell. Only the owner sees profit, stock prices and expenses.</p></div>
-      <div class="card"><h3>Phones and tablets too</h3><p>Open Stockly on any device on the shop wi-fi, or install it as an app with its own icon.</p></div>
-      <div class="card"><h3>Your data is yours</h3><p>One file on your computer holds everything. Copy it to a USB stick and you have a full backup. Nothing is sent anywhere.</p></div>
-      <div class="card"><h3>Reports</h3><p>Sales by day, export to Excel as CSV, and a full export of all records whenever you like.</p></div>
+      <div class="card"><h3>Sell fast</h3><p>Scan with a USB scanner or the device camera. Sell loose amounts like 2.5 m or 1.5 kg. Print the receipt with your logo.</p></div>
+      <div class="card"><h3>Udhar khata</h3><p>Sell on credit, receive payments, send WhatsApp reminders, and always know who owes what.</p></div>
+      <div class="card"><h3>Works offline</h3><p>Internet down? Keep selling, cash or udhar. Sales are saved on the device and upload by themselves later.</p></div>
+      <div class="card"><h3>Today's profit</h3><p>Revenue, profit after expenses, monthly totals, udhar outstanding, low stock and expiry alerts on one screen.</p></div>
+      <div class="card"><h3>Returns</h3><p>Return part of any sale, from Reports or the customer's khata. Stock goes back on the shelf automatically.</p></div>
+      <div class="card"><h3>Daily backups</h3><p>A copy every day on the computer and in your Google Drive, with a warning if backups ever stop.</p></div>
+      <div class="card"><h3>Staff accounts</h3><p>Cashiers can sell and give udhar within limits. Only the owner sees profit, cost prices and expenses.</p></div>
+      <div class="card"><h3>Installs like an app</h3><p>Its own icon and window on the computer, starts by itself when the computer turns on, and works on phones over wi-fi.</p></div>
     </div>
     <div class="phone-row" style="margin-top:40px">
       <div>
@@ -240,8 +314,12 @@
   <div class="wrap">
     <h2>Questions</h2>
     <details><summary>Does it need internet?</summary><p>Only for the install. After that, selling, stock, receipts and reports all work with no internet at all.</p></details>
-    <details><summary>Where is my data kept?</summary><p>In one file on your own computer, inside the Stockly folder. It is never uploaded anywhere. Copy that folder to a USB stick every week and you have a complete backup.</p></details>
+    <details><summary>Where is my data kept?</summary><p>In one file on your own computer, inside the Stockly folder. Nothing is sent to us or anyone else. The only copy that leaves the computer is the backup you choose to keep in your own Google Drive.</p></details>
     <details><summary>Can I use it on my phone?</summary><p>Yes. While the shop computer is on, any phone or tablet on the same wi-fi can open Stockly in its browser and install it as an app. The computer holds the data; the others just show it.</p></details>
+    <details><summary>How does udhar work?</summary><p>Open Udhar khata and press Sell on udhar. Add items as usual, choose the customer (or add a new one with a name and mobile), then choose all on udhar or part paid now. The amount goes on their khata. When they pay, open their name and press Receive payment.</p></details>
+    <details><summary>Does an udhar sale reduce my stock?</summary><p>Yes, at the moment of sale, exactly like a cash sale: the goods have left the shop. A return puts the stock back. Receiving a payment later only reduces what the customer owes.</p></details>
+    <details><summary>Can a customer return something they took on udhar?</summary><p>Yes, from their khata: press Return next to the sale. The refund comes off what they owe first; anything beyond that is paid back in cash, and Stockly shows the split before you confirm.</p></details>
+    <details><summary>What happens if my computer breaks?</summary><p>Stockly backs up every day. Connect Google Drive once on the Backups page and every copy is also kept in your own Drive. On a new computer, install Stockly, put the backup in place, and every product, sale and khata comes back.</p></details>
     <details><summary>Can my cashier see my profit?</summary><p>No. Cashiers can sell and take returns. Profit, cost prices, stock editing and expenses are for the owner only.</p></details>
     <details><summary>What if I change computers?</summary><p>Copy your data folder to the new machine and message us with the computer code shown on screen. We issue a new key for the new computer at no charge.</p></details>
     <details><summary>Is there a monthly fee?</summary><p>No. You pay Rs 30,000 once for the licence. Optional yearly support is available if you want someone on call.</p></details>
