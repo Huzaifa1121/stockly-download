@@ -80,6 +80,12 @@
   .thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 18px; }
   .thumbs a { display: block; text-decoration: none; color: var(--muted); font-size: 13px; text-align: center; }
   .thumbs img { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 6px; box-shadow: 0 6px 16px rgba(15,23,42,.08); }
+  .macbox { margin-top: 22px; max-width: 760px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 14px; padding: 14px 16px; }
+  .macbox-title { font-weight: 700; margin-bottom: 8px; }
+  .macbox-row { display: flex; gap: 8px; align-items: stretch; }
+  .macbox code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; background: rgba(0,0,0,.35); border-radius: 8px; padding: 10px 12px; font-size: 13px; color: #ccfbf1; }
+  .macbox button { border: 0; border-radius: 8px; padding: 0 16px; font-weight: 700; background: #fff; color: var(--ink); cursor: pointer; }
+  .macbox-help { font-size: 13px; color: #99f6e4; margin-top: 8px; }
   .split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
   .split h2 { margin-top: 10px; }
   .ticks { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
@@ -133,6 +139,16 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 0 16.4 8.1 8.1 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.3 4.3c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.3 2.5 1 3 .8 3.5.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6z"/></svg>
         Ask on WhatsApp
       </a>
+    </div>
+    <div class="macbox">
+      <div class="macbox-title"> On a Mac? Install with one line</div>
+      <div class="macbox-row"><code id="maccmd">/bin/bash -c &quot;$(curl -fsSL https://huzaifa1121.github.io/stockly-download/install.sh)&quot;</code><button type="button" id="copycmd">Copy</button></div>
+      <div class="macbox-help">Open <b>Terminal</b> (press ⌘ + Space, type Terminal, press Enter), paste this line, press Enter. Stockly installs and opens. No security warnings.</div>
+    </div>
+    <div class="macbox">
+      <div class="macbox-title">⊞ On Windows? Install with one line</div>
+      <div class="macbox-row"><code id="wincmd">irm https://huzaifa1121.github.io/stockly-download/install-windows.ps1 | iex</code><button type="button" id="copywin">Copy</button></div>
+      <div class="macbox-help">Right-click the Start button, choose <b>Terminal</b> or <b>Windows PowerShell</b>, paste this line, press Enter. No SmartScreen warnings.</div>
     </div>
     <div class="note">Rs 30,000 once, no monthly fee. Free to download. The licence key you buy unlocks it for your shop — one computer, no expiry.</div>
   </div>
@@ -257,36 +273,14 @@
 
 <section id="install">
   <div class="wrap">
-    <h2>Up and running in three steps</h2>
-    <p class="lead">You need a Windows PC or a Mac that stays on while the shop is open, and internet for the install only.</p>
+    <h2>Up and running in minutes</h2>
+    <p class="lead">You need a Mac or Windows PC that stays on while the shop is open, and internet for the install only.</p>
     <div class="steps">
-      <div class="step"><h3>Download and unzip</h3><p>Press the Download button, then move the Stockly folder into Documents.</p></div>
-      <div class="step"><h3>Double-click Start Stockly</h3><p>The first time it installs what it needs and takes a few minutes. After that it opens in seconds, or starts by itself with the computer.</p></div>
-      <div class="step"><h3>Paste your licence key</h3><p>Message us on WhatsApp, pay, and you get a key straight back. Paste it on the first screen. Then name your shop and start selling.</p></div>
+      <div class="step"><h3>Mac: one line in Terminal</h3><p>Open Terminal (⌘ + Space, type Terminal), paste the line from the top of this page, press Enter. Stockly installs, adds itself to Applications, and opens.</p></div>
+      <div class="step"><h3>Windows: one line in PowerShell</h3><p>Right-click Start, open Terminal or PowerShell, paste the Windows line from the top of this page, press Enter. Stockly installs, adds itself to the Start menu, and opens.</p></div>
+      <div class="step"><h3>Paste your licence key</h3><p>Message us on WhatsApp, pay, and you get a key straight back. Paste it on the first screen, name your shop, and start selling.</p></div>
     </div>
-
-    <h2 style="margin-top:40px;font-size:22px">The security warning on first run</h2>
-    <p class="lead">Every program downloaded from the internet gets a warning the first time. This is normal. Here is what to click.</p>
-    <div class="os">
-      <div class="card">
-        <h3>Windows</h3>
-        <ol>
-          <li>Double-click <kbd>Start Stockly</kbd>.</li>
-          <li>If "Windows protected your PC" appears, click <kbd>More info</kbd>, then <kbd>Run anyway</kbd>.</li>
-          <li>If "Open File - Security Warning" appears, click <kbd>Run</kbd>.</li>
-          <li>Say yes to installing Node.js when asked. Stockly runs on it.</li>
-        </ol>
-      </div>
-      <div class="card">
-        <h3>Mac</h3>
-        <ol>
-          <li>Right-click <kbd>Start Stockly</kbd> and choose <kbd>Open</kbd>.</li>
-          <li>Click <kbd>Open</kbd> again in the warning. You only do this once.</li>
-          <li>Enter your Mac's password when it installs Node.js.</li>
-        </ol>
-      </div>
-    </div>
-    <p style="margin-top:20px"><a href="INSTALL.md">Read the full install guide</a>, including backups, other devices in the shop, and what to do when something goes wrong.</p>
+    <p style="margin-top:20px">Already installed? Paste the same line again to update: your records are kept. <a href="INSTALL.md">Read the full install guide</a>.</p>
   </div>
 </section>
 
@@ -353,6 +347,19 @@
       });
     });
   });
+</script>
+<script>
+  (function () {
+    [["copycmd", "maccmd"], ["copywin", "wincmd"]].forEach(function (ids) {
+      var b = document.getElementById(ids[0]), c = document.getElementById(ids[1]);
+      if (!b || !c) return;
+      b.addEventListener("click", function () {
+        var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+        if (navigator.clipboard) navigator.clipboard.writeText(c.textContent).then(done, function () {});
+        else { var r = document.createRange(); r.selectNodeContents(c); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+      });
+    });
+  })();
 </script>
 </body>
 </html>

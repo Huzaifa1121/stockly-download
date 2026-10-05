@@ -29,6 +29,10 @@ if ! gh repo view "$REPO" >/dev/null 2>&1; then
   gh repo create "$REPO" --public --description "Download Stockly: inventory and point-of-sale for small shops. Works offline, data stays in the shop."
 fi
 
+# The Mac one-line installer lives in the app's repo; the website serves it.
+cp "$APP/installer/install-mac.sh" install.sh
+cp "$APP/installer/install-windows.ps1" install-windows.ps1
+
 # 2. Push the site.
 if [ ! -d .git ]; then
   git init -q -b main
