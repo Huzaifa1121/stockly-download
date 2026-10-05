@@ -3,9 +3,8 @@
 Stockly runs on the shop's own computer. The shop's data never leaves that
 machine. No internet is needed to sell.
 
-One computer holds the data. Other devices in the shop — a phone, a tablet,
-a second till — open it in a browser over the shop's wi-fi, or through ngrok
-from anywhere (see the end of this guide).
+One computer holds the data. Phones and tablets open it through the shop's
+own secure link, in the shop or from anywhere (see **Phones and tablets**).
 
 ---
 
@@ -22,13 +21,54 @@ software always does. There is no database to install.
 
 ## Install it
 
-1. Copy the **stockly** folder onto the computer, for example into Documents.
-2. Open the folder and double-click **Start Stockly**.
-3. Wait. The first time it installs everything it needs and takes a few
-   minutes; after that it opens in seconds.
+### Mac — one line, no warnings
 
-> **Mac:** if it says the file is from an unidentified developer, right-click
-> **Start Stockly** → **Open** → **Open**. You only do this once.
+1. Open **Terminal**: press ⌘ + Space, type `Terminal`, press Enter.
+2. Paste this line and press Enter:
+
+   ```
+   /bin/bash -c "$(curl -fsSL https://huzaifa1121.github.io/stockly-download/install.sh)"
+   ```
+
+3. Answer its questions (it may ask to install Node.js and for the Mac's
+   password, and whether Stockly should start by itself — say yes). The first
+   time takes a few minutes.
+
+Stockly installs into a **Stockly** folder in your home folder, adds
+**Stockly** to Applications and Launchpad, and opens. Paste the same line
+again any time to update: the shop's records, settings and licence are kept.
+
+> Why a line in Terminal: macOS blocks downloaded files from developers who
+> haven't paid Apple to sign them ("Apple could not verify…"). This way
+> nothing is blocked and there is nothing to approve in System Settings.
+
+### Windows — one line, no warnings
+
+1. Right-click the **Start** button and choose **Terminal** (or **Windows
+   PowerShell**).
+2. Paste this line and press Enter:
+
+   ```
+   irm https://huzaifa1121.github.io/stockly-download/install-windows.ps1 | iex
+   ```
+
+3. Answer its questions (it may install Node.js, and asks whether Stockly
+   should start by itself — say yes).
+
+Stockly installs into a **Stockly** folder in your user folder, adds
+**Stockly** to the Start menu, and opens. Paste the same line again to
+update; the shop's records are kept.
+
+**Or from the downloaded zip:**
+
+1. Open **Downloads**, right-click **stockly.zip** and choose **Extract
+   all…** (opening the zip and double-clicking inside it does not work —
+   Windows asks to "Extract all" first).
+2. Choose **Documents** as the place, tick **Show extracted files when
+   complete**, press **Extract**.
+3. Open the new **stockly-…** folder and double-click **Start Stockly**.
+4. If a blue box says **Windows protected your PC**, press **More info**,
+   then **Run anyway**. Only the first time.
 
 ---
 
@@ -36,24 +76,30 @@ software always does. There is no database to install.
 
 If you said yes to "start automatically" during setup, there is nothing to
 do: Stockly is already running in the background from the moment the
-computer turns on, with no window to close by mistake. Open it from its icon
-(see **Make it an app** below) or at `http://localhost:3000`.
+computer turns on, with no window to close by mistake. On a Mac, open it
+from **Stockly** in Applications or Launchpad; on Windows from the Start
+menu, or at `http://localhost:3000`.
 
-Otherwise, double-click **Start Stockly** — the same file, every day. A black
-window opens, and Stockly opens in its own window if it has been installed
-as an app, or in the browser if not.
+Otherwise, open **Stockly** from Applications (Mac), or double-click
+**Start Stockly** in the Stockly folder. A black window opens; **leave it
+open** — closing it stops Stockly.
 
-**Leave the black window open.** Closing it stops Stockly.
-
-To stop Stockly whichever way it was started, double-click **Stop Stockly**.
+To stop Stockly whichever way it was started, double-click **Stop Stockly**
+in the Stockly folder.
 
 ---
 
 ## The first screen
 
-The very first screen asks for the **licence key** that came with the
-purchase. Paste it in and press Activate — it is only asked once, on this
-computer, and needs no internet.
+The very first screen is the **Licence** screen. It shows this computer's
+**computer code**, like `1A2B-3C4D-5E6F`.
+
+1. Send that code to your supplier on WhatsApp (there is a Copy button).
+2. They send back a **licence key** made for this computer only.
+3. Paste the key and press **Activate Stockly**.
+
+It is only asked once, on this computer, and needs no internet. A key made
+for another computer will not work here.
 
 Then, the first time only, Stockly asks for:
 
@@ -96,9 +142,13 @@ instead of a browser tab.
 | Stop it | Double-click **Stop Stockly** |
 | Stop it starting automatically | Double-click **Stop starting automatically** |
 | Add staff | **Users** → Add user. Cashiers can sell but not see profit, stock editing or expenses |
+| Sell on udhar | **Udhar khata** → **Sell on udhar**. Same products; pick the customer, then all on udhar or part paid now |
+| Customer pays udhar | **Udhar khata** → the customer → **Receive payment** (cash, Easypaisa, JazzCash or bank) |
+| Remind a customer | The customer's page → **WhatsApp reminder** opens WhatsApp with the amount filled in |
+| Bring over the paper register | **Udhar khata** → **+ Add customer** → "Already owes" (owner only) |
 | Change shop details | **Settings** |
 | Put your shop's logo on screen and receipts | **Settings** → Shop logo → Choose picture, then **Save** |
-| Back up | Copy the `data` folder somewhere safe (see below) |
+| Back up | Automatic. See **Backups** in the menu, and connect Google Drive (see below) |
 
 ---
 
@@ -106,50 +156,89 @@ instead of a browser tab.
 
 Everything lives in one file: **`data/stockly.db`** inside the Stockly folder.
 
-Copy that folder to a USB stick or cloud drive **every week**. To restore, copy
-it back into place while Stockly is stopped.
+Stockly backs it up by itself. Open **Backups** in the menu (owner only):
+
+- **On this computer:** a copy is saved in `data/backups` at the times you
+  choose (9 PM unless you change it), and the last 7 are kept. If the
+  computer was off at every time, Stockly backs up soon after it starts.
+- **Google Drive** (when your supplier has switched it on): press **Connect Google Drive** and sign in once. Each
+  backup is then uploaded to a **Stockly backups** folder in your Drive.
+  Stockly can only see that folder, nothing else in your Drive.
+- **Back up now** and **Download backup** do it straight away.
+
+The dashboard warns you if there has been no backup for 3 days.
+
+> A copy on the same computer does not survive the computer dying. Connect
+> Google Drive, or copy `data/backups` to a USB stick every week.
+
+### Restoring a backup
+
+Use this after a mistake, or on a new computer after the old one died.
+
+1. Open **Backups** in the menu, on the shop computer (owner only).
+2. Under **Restore from a backup**, press **Choose backup file** and pick the
+   backup: a `stockly-backup-….db` from **Download backup**, or a
+   `stockly-backup-….db.gz` from Google Drive or a USB stick. To go back to a
+   copy already on this computer, press **Restore** next to it instead.
+3. Stockly shows what is inside — the shop, how many products, sales and
+   khata customers, and the last sale. Check it is the right one, then press
+   **Restore this backup**.
+4. Double-click **Stop Stockly**, then **Start Stockly** (or restart the
+   computer). The restore finishes by itself as Stockly starts.
+
+Everything that was in Stockly before is kept as
+`data/backups/before-restore-<date>.db`, so a restore can itself be undone
+the same way. The licence already entered on this computer stays.
+
+**On a new computer:** install Stockly and enter its licence first (a key
+for the new computer — see "This licence belongs to another computer"
+below), then restore. Connect Google Drive and phone access again afterwards.
+
+The JSON from **Settings → Export everything** is a readable record, not a
+backup: it cannot be restored.
+
+**By hand, only if Stockly will not start:** stop Stockly, unzip the backup
+and name it `stockly.db`, put it in the `data` folder in place of the old
+one, **delete `stockly.db-wal` and `stockly.db-shm` from the `data` folder if
+they are there** (otherwise the old changes are replayed onto the backup),
+then start Stockly.
 
 There is also **Settings → Export everything**, which downloads all records as
 a readable file.
 
-> If the computer dies and you have no copy of `data`, the shop's records are
-> gone. Nobody else holds them.
-
 ---
 
-## Other devices in the shop
+## Phones and tablets
 
-While Stockly is running, find the computer's address on the shop wi-fi:
+Phones reach Stockly through a secure **https** link that belongs to the
+shop's own free ngrok account. Stockly opens the link by itself; nothing else
+is installed. The shop computer accepts no other connections.
 
-- **Windows:** open the black window and type `ipconfig`; look for IPv4 Address
-- **Mac:** System Settings → Network
+**Set it up once, on the shop computer** (about three minutes):
 
-Other devices then open `http://THAT-ADDRESS:3000`, for example
-`http://192.168.1.5:3000`.
+1. Open **Phone access** in the menu (owner only).
+2. Make a free account at ngrok.com — the page links straight to it.
+3. Copy **Your Authtoken** from the ngrok dashboard and paste it in.
+4. Copy your free domain from **Domains** in the ngrok dashboard and paste it
+   in, so the link never changes. (Optional, but recommended.)
+5. Press **Save and turn on**. The link and a QR code appear.
 
-The camera barcode scanner needs either `localhost` or HTTPS, so on other
-devices over plain wi-fi you can still type or use a USB scanner.
+**On each phone:** scan the QR code or open the link, tap **Visit Site** on
+the ngrok notice the first time, sign in, then **Add to Home Screen**.
 
----
+Good to know:
 
-## Reaching the shop from anywhere (optional, ngrok)
-
-1. Install ngrok from [ngrok.com](https://ngrok.com) and sign in to get your token.
-2. `ngrok config add-authtoken YOUR_TOKEN`
-3. With Stockly running, in another window: `ngrok http 3000`
-4. ngrok prints an `https://…` address that works from anywhere.
-
-**If you use ngrok, open the `.env` file in the Stockly folder and set:**
-
-```
-COOKIE_SECURE="true"
-APP_URL="https://your-ngrok-address"
-```
-
-Then stop and start Stockly again.
-
-> The address is public: anyone with it reaches your sign-in page. Use a
-> strong password, and only share the link with people you trust.
+- The computer must be on with Stockly running, and both the computer and
+  the phone need internet. If the shop's internet drops, the computer keeps
+  selling and phones reconnect when it is back.
+- Over the link, the camera barcode scanner and "install as an app" work on
+  phones too, because the link is https.
+- Anyone with the link reaches the sign-in page. Use strong passwords, give
+  staff their own cashier accounts, and remove them when they leave.
+- First-run setup, the licence, connecting Google Drive and Phone access
+  itself only work on the shop computer, never through the link.
+- **Turn off** on the Phone access page closes the link at once.
+- Each shop needs its own ngrok account: one account cannot run two shops.
 
 ---
 
@@ -183,6 +272,9 @@ It asks for a new password and signs that account out everywhere.
 | Windows: "cannot see it yet" after installing Node | Close that window and double-click `setup.bat` again — it carries on |
 | "This licence belongs to another computer" | Stockly has been moved to a different PC. Send the supplier the computer code on that screen and they will issue a new key |
 | Browser says it can't connect | Stockly is not running — double-click **Start Stockly** |
+| Phone link doesn't open | Check the computer is on and has internet, then **Phone access** on the computer: it says what is wrong |
+| Phone access says ngrok did not accept the key | Copy the authtoken again from the ngrok dashboard and paste it in |
+| "This can only be done on the shop's own computer" | Do it at the shop computer, not on the phone link |
 | Nothing happens at login, or a black window still appears | Run `setup.bat` / `setup.command` again; it refreshes how Stockly starts |
 | "Port 3000 is in use" | Something else uses that port. Close it, or ask the installer to change the port |
 | Forgotten password | See above |

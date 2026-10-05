@@ -86,6 +86,14 @@
   .macbox code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; background: rgba(0,0,0,.35); border-radius: 8px; padding: 10px 12px; font-size: 13px; color: #ccfbf1; }
   .macbox button { border: 0; border-radius: 8px; padding: 0 16px; font-weight: 700; background: #fff; color: var(--ink); cursor: pointer; }
   .macbox-help { font-size: 13px; color: #99f6e4; margin-top: 8px; }
+  .howto h3 { font-size: 18px; margin: 0 0 6px; }
+  .howto .way { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--teal-dark); margin: 14px 0 6px; }
+  .howto ol { margin: 0; padding-left: 20px; color: var(--muted); font-size: 14px; }
+  .howto li { margin-bottom: 7px; }
+  .howto .cmd { margin-top: 6px; background: #0f172a; border-radius: 8px; padding: 6px 6px 6px 10px; display: flex; gap: 8px; align-items: center; }
+  .howto .cmd code { flex: 1; min-width: 0; overflow-x: auto; }
+  .howto .cmd button { border: 0; border-radius: 6px; padding: 6px 12px; font-weight: 700; background: #fff; color: var(--ink); cursor: pointer; font-size: 12px; }
+  .howto .cmd code { color: #ccfbf1; font-size: 12px; white-space: nowrap; }
   .split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
   .split h2 { margin-top: 10px; }
   .ticks { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
@@ -141,12 +149,12 @@
       </a>
     </div>
     <div class="macbox">
-      <div class="macbox-title"> On a Mac? Install with one line</div>
+      <div class="macbox-title">On a Mac? Install with one line</div>
       <div class="macbox-row"><code id="maccmd">/bin/bash -c &quot;$(curl -fsSL https://huzaifa1121.github.io/stockly-download/install.sh)&quot;</code><button type="button" id="copycmd">Copy</button></div>
       <div class="macbox-help">Open <b>Terminal</b> (press ⌘ + Space, type Terminal, press Enter), paste this line, press Enter. Stockly installs and opens. No security warnings.</div>
     </div>
     <div class="macbox">
-      <div class="macbox-title">⊞ On Windows? Install with one line</div>
+      <div class="macbox-title">On Windows? Install with one line</div>
       <div class="macbox-row"><code id="wincmd">irm https://huzaifa1121.github.io/stockly-download/install-windows.ps1 | iex</code><button type="button" id="copywin">Copy</button></div>
       <div class="macbox-help">Right-click the Start button, choose <b>Terminal</b> or <b>Windows PowerShell</b>, paste this line, press Enter. No SmartScreen warnings.</div>
     </div>
@@ -273,14 +281,56 @@
 
 <section id="install">
   <div class="wrap">
-    <h2>Up and running in minutes</h2>
-    <p class="lead">You need a Mac or Windows PC that stays on while the shop is open, and internet for the install only.</p>
-    <div class="steps">
-      <div class="step"><h3>Mac: one line in Terminal</h3><p>Open Terminal (⌘ + Space, type Terminal), paste the line from the top of this page, press Enter. Stockly installs, adds itself to Applications, and opens.</p></div>
-      <div class="step"><h3>Windows: one line in PowerShell</h3><p>Right-click Start, open Terminal or PowerShell, paste the Windows line from the top of this page, press Enter. Stockly installs, adds itself to the Start menu, and opens.</p></div>
-      <div class="step"><h3>Paste your licence key</h3><p>Message us on WhatsApp, pay, and you get a key straight back. Paste it on the first screen, name your shop, and start selling.</p></div>
+    <h2>How to install</h2>
+    <p class="lead">You need a Mac or a Windows PC that stays on while the shop is open, and internet for the install only. It takes a few minutes, once.</p>
+
+    <div class="os">
+      <div class="card howto">
+        <h3>Mac</h3>
+        <div class="way">Easiest — one line, no warnings</div>
+        <ol>
+          <li>Open <b>Terminal</b>: press <kbd>⌘ Command</kbd> + <kbd>Space</kbd>, type <kbd>Terminal</kbd>, press <kbd>Enter</kbd>.</li>
+          <li>Paste this line and press <kbd>Enter</kbd>:
+            <div class="cmd"><code>/bin/bash -c &quot;$(curl -fsSL https://huzaifa1121.github.io/stockly-download/install.sh)&quot;</code></div></li>
+          <li>Answer its questions. If it asks for the Mac's password, type it (it stays invisible — that's normal). For <b>Start automatically?</b> type <kbd>Y</kbd>.</li>
+          <li>Stockly opens, and is in <b>Applications</b> and <b>Launchpad</b> from now on.</li>
+        </ol>
+        <div class="way">Or from the download</div>
+        <ol>
+          <li>Download, open <b>Downloads</b>, double-click the zip.</li>
+          <li>Move the <b>stockly-…</b> folder into <b>Documents</b> and double-click <b>Start Stockly</b>.</li>
+          <li>If the Mac says <i>Apple could not verify…</i>: press <b>Done</b>, open <b>System Settings → Privacy &amp; Security</b>, scroll down, press <b>Open Anyway</b>, then <b>Open</b>.</li>
+        </ol>
+      </div>
+
+      <div class="card howto">
+        <h3>Windows</h3>
+        <div class="way">Easiest — one line, no warnings</div>
+        <ol>
+          <li>Right-click the <b>Start</b> button and choose <b>Terminal</b> (or <b>Windows PowerShell</b>).</li>
+          <li>Paste this line and press <kbd>Enter</kbd>:
+            <div class="cmd"><code>irm https://huzaifa1121.github.io/stockly-download/install-windows.ps1 | iex</code></div></li>
+          <li>Answer its questions. If it asks to install Node.js, type <kbd>Y</kbd>, then press <b>Yes</b> when Windows asks. For <b>Start automatically?</b> type <kbd>Y</kbd>.</li>
+          <li>Stockly opens, and is in the <b>Start menu</b> from now on.</li>
+        </ol>
+        <div class="way">Or from the download</div>
+        <ol>
+          <li>Download, open <b>Downloads</b>, <b>right-click</b> the zip and choose <b>Extract all…</b> — choose <b>Documents</b>, press <b>Extract</b>. (Double-clicking inside the zip without extracting does not work.)</li>
+          <li>Open the new <b>stockly-…</b> folder and double-click <b>Start Stockly</b>.</li>
+          <li>If a blue box says <i>Windows protected your PC</i>: press <b>More info</b>, then <b>Run anyway</b>. Only the first time.</li>
+        </ol>
+      </div>
     </div>
-    <p style="margin-top:20px">Already installed? Paste the same line again to update: your records are kept. <a href="INSTALL.md">Read the full install guide</a>.</p>
+
+    <div class="card howto" style="margin-top:16px">
+      <h3>Then: your licence</h3>
+      <ol>
+        <li>Stockly opens on the <b>Licence</b> screen, showing this computer's <b>computer code</b>, like <code>1A2B-3C4D-5E6F</code>.</li>
+        <li>Send that code to us on <a href="https://wa.me/923076755647?text=Salam%2C%20my%20Stockly%20computer%20code%20is%3A%20" target="_blank" rel="noopener">WhatsApp</a>. After payment you get a licence key made for that computer.</li>
+        <li>Paste the key, press <b>Activate Stockly</b>, then enter your shop name and a password — <b>write the password down</b>.</li>
+      </ol>
+      <p style="margin:10px 0 0;color:var(--muted);font-size:14px">Already installed? Paste the same line again to update — your records are kept. Every download also has <b>READ ME FIRST.txt</b> with these steps. <a href="INSTALL.md">Full install guide</a>.</p>
+    </div>
   </div>
 </section>
 
@@ -307,6 +357,7 @@
 <section id="faq">
   <div class="wrap">
     <h2>Questions</h2>
+    <details><summary>How do I install it?</summary><p>Mac: open Terminal and paste the Mac line from the top of this page. Windows: right-click Start, open Terminal or PowerShell, and paste the Windows line. Or download the zip — on Windows right-click it and choose Extract all first. Then send us the computer code shown on the licence screen. <a href="#install">Step by step</a>.</p></details>
     <details><summary>Does it need internet?</summary><p>Only for the install. After that, selling, stock, receipts and reports all work with no internet at all.</p></details>
     <details><summary>Where is my data kept?</summary><p>In one file on your own computer, inside the Stockly folder. Nothing is sent to us or anyone else. The only copy that leaves the computer is the backup you choose to keep in your own Google Drive.</p></details>
     <details><summary>Can I use it on my phone?</summary><p>Yes, in the shop or from home. On the Phone access page, connect your own free ngrok account once and Stockly gives you a secure link and a QR code. Scan it on each phone, sign in, and add it to the home screen. The shop computer needs to be on with internet; your records stay on it.</p></details>
@@ -360,6 +411,17 @@
       });
     });
   })();
+</script>
+<script>
+  // A Copy button on every command in the install steps.
+  document.querySelectorAll(".howto .cmd").forEach(function (box) {
+    var code = box.querySelector("code"), b = document.createElement("button");
+    b.type = "button"; b.textContent = "Copy";
+    b.addEventListener("click", function () {
+      if (navigator.clipboard) navigator.clipboard.writeText(code.textContent).then(function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); });
+    });
+    box.appendChild(b);
+  });
 </script>
 </body>
 </html>

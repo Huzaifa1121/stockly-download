@@ -32,6 +32,8 @@ fi
 # The Mac one-line installer lives in the app's repo; the website serves it.
 cp "$APP/installer/install-mac.sh" install.sh
 cp "$APP/installer/install-windows.ps1" install-windows.ps1
+# The install guide on the website is always the one shipped in the download.
+cp "$APP/INSTALL.md" INSTALL.md
 
 # 2. Push the site.
 if [ ! -d .git ]; then
